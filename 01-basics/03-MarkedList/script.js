@@ -30,3 +30,20 @@ const emails = [
 ];
 
 // Требуется создать Vue приложение
+const app = createApp({
+  data() {
+    return {
+      search: '',
+    };
+  },
+  computed: {
+    searchMatches() {
+      return emails.map(emailItem => ({
+        name: emailItem,
+        isMarked: this.search && emailItem.toLowerCase().includes(this.search.toLowerCase()),
+      }));
+    },
+  },
+});
+
+app.mount('#app');
