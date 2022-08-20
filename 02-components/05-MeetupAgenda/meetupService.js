@@ -13,7 +13,7 @@ export const agendaItemDefaultTitles = {
 };
 
 /**
- * Словарь иконок для для всех типов пунктов программы.
+ * Словарь иконок для всех типов пунктов программы.
  * Соответствует имени иконок в директории /assets/icons
  */
 export const agendaItemIcons = {
