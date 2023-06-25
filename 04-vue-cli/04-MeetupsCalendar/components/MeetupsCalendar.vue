@@ -98,23 +98,19 @@ export default {
       const dayMilliseconds = 24*60*60*1000;
       const days = [];
 
-      // получим первое и последнее число месяца
       const firstDayOfMonth = this.getFirstDateOfMonth(date);
       const lastDayOfMonth = this.getLastDateOfMonth(date);
 
-      // положим в массив числа предыдущего месяца
       for(let i=firstDayOfMonth.getDay() - 1; i>0; i--) {
         const calcDate = new Date().setTime(firstDayOfMonth.getTime() - dayMilliseconds * i);
         days.push(this.fillCalendarDate(calcDate, false));
       }
 
-      // положим в массив числа текущего месяца
       for(let i=0; i<lastDayOfMonth.getDate(); i++) {
         const calcDate = new Date().setTime(firstDayOfMonth.getTime() + dayMilliseconds * i);
         days.push(this.fillCalendarDate(calcDate, true));
       }
 
-      // положим в массив числа следующего месяца
       if(lastDayOfMonth.getDay() > 0) {
         for(let i=lastDayOfMonth.getDay() + 1, j=0; i<8; i++, j++) {
           const calcDate = new Date(new Date().setTime(firstDayOfMonth.getTime() + dayMilliseconds * (lastDayOfMonth.getDate() + j)));
@@ -132,7 +128,6 @@ export default {
       this.meetups.forEach((meetup) => {
         const meetupDate = new Date(new Date().setTime(meetup.date));
 
-        // сравнение дат без учёта времени и часового пояса
         if(meetupDate.getFullYear() === date.getFullYear() && meetupDate.getMonth() === date.getMonth() && meetupDate.getDate() === date.getDate()) {
           dateMeetups.push(meetup);
         }
