@@ -1,10 +1,28 @@
 <template>
-  <a class="tabs__tab tabs__tab_active" role="tab">Tab</a>
+  <router-link :to="to" class="tabs__tab" role="tab" :class="{ 'tabs__tab_active': isActive }">
+    <slot></slot>
+  </router-link>
 </template>
 
 <script>
 export default {
   name: 'UiTabsLink',
+  props: {
+    to: {
+      type: [String, Object],
+      required: true,
+    },
+  },
+  computed: {
+    isActive() {
+      if (typeof this.to === 'string') {
+        return this.$route.path === this.to;
+      } else if (typeof this.to === 'object' && this.to.name) {
+        return this.$route.name === this.to.name;
+      }
+      return false;
+    },
+  },
 };
 </script>
 
