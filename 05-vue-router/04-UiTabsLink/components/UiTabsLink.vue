@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="to" class="tabs__tab" role="tab" :class="{ 'tabs__tab_active': isActive }">
+  <router-link :to="to" class="tabs__tab" role="tab" active-class="tabs__tab_active">
     <slot></slot>
   </router-link>
 </template>
@@ -11,16 +11,6 @@ export default {
     to: {
       type: [String, Object],
       required: true,
-    },
-  },
-  computed: {
-    isActive() {
-      if (typeof this.to === 'string') {
-        return this.$route.path === this.to;
-      } else if (typeof this.to === 'object' && this.to.name) {
-        return this.$route.name === this.to.name;
-      }
-      return false;
     },
   },
 };
