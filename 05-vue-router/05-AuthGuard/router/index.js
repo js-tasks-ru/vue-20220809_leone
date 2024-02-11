@@ -40,4 +40,20 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach((to, from) => {
+  const requireAuth = to.meta.requireAuth;
+  const requireGuest = to.meta.requireGuest;
+
+  if (requireAuth && !isAuthenticated()) {
+    return {
+      path: '/login',
+      query: { from: to.fullPath },
+    };
+  } else if (requireGuest && isAuthenticated()) {
+    return '/';
+  } else {
+    return true;
+  }
+});
+
 export { router };
